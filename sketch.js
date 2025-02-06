@@ -63,57 +63,85 @@ function setup() {
 
 function draw() {
   if (timer <= 0) {
-    document.body.innerHTML = "";
+    // Limpiamos solo el canvas
+    clear();
+    noLoop();
+    
+    // Aseguramos que el fondo rojo cubra toda la pantalla
+    document.body.style.backgroundImage = 'none';
     document.body.style.backgroundColor = "red";
+    document.body.style.transition = "background-color 0.5s";
+    
+    // Ocultamos los elementos del juego
+    const scoreElement = document.getElementById("score");
+    const timerElement = document.getElementById("timer");
+    const titleElement = document.getElementById("gameTitle");
+    if (scoreElement) scoreElement.style.display = "none";
+    if (timerElement) timerElement.style.display = "none";
+    if (titleElement) {
+      titleElement.textContent = `¡Has conseguido ${score} puntos!`;
+      titleElement.style.fontSize = '48px';
+      titleElement.style.marginTop = '20px';
+    }
 
     let img = createImg(
       "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWY4anM4bXk3anVqNm55Z3ZvMWtocjAwNWF3NDduemV5cjRnbHZ2NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eJ4j2VnYOZU8qJU3Py/giphy.gif"
     );
-    img.position((width - img.width) / 2, (height - img.height) / 2);
+    img.position(windowWidth/2 - 200, windowHeight/2 - 200);
+    img.size(400, 400);
+    img.style('z-index', '1000');
     img.show();
 
-    const button = document.createElement("button");
-    button.innerText = "Volver a jugar";
-    button.style.display = "block";
-    button.style.margin = "20px auto";
-    button.style.padding = "10px 20px";
-    button.style.fontSize = "16px";
-    button.style.cursor = "pointer";
-    button.style.position = "absolute";
-    button.style.top = img.position().y + img.height + "px";
-    button.style.left = (width - button.offsetWidth) / 2 - 70 + "px";
-    button.onclick = function () {
-      location.reload();
-    };
+    const button = createButton('Volver a jugar');
+    button.position(windowWidth/2 - 70, windowHeight/2 + 220);
+    button.style('padding', '10px 20px');
+    button.style('fontSize', '16px');
+    button.style('cursor', 'pointer');
+    button.style('z-index', '1000');
+    button.mousePressed(() => window.location.reload());
 
-    document.body.appendChild(button);
+    return;
   }
 
   if (score >= 120) {
-    document.body.innerHTML = "";
+    // Limpiamos solo el canvas
+    clear();
+    noLoop();
+    
+    // Aseguramos que el fondo azul cubra toda la pantalla
+    document.body.style.backgroundImage = 'none';
     document.body.style.backgroundColor = "#13B8FF";
+    document.body.style.transition = "background-color 0.5s";
+    
+    // Ocultamos los elementos del juego
+    const scoreElement = document.getElementById("score");
+    const timerElement = document.getElementById("timer");
+    const titleElement = document.getElementById("gameTitle");
+    if (scoreElement) scoreElement.style.display = "none";
+    if (timerElement) timerElement.style.display = "none";
+    if (titleElement) {
+      titleElement.textContent = `¡Felicidades! ¡Has conseguido ${score} puntos!`;
+      titleElement.style.fontSize = '48px';
+      titleElement.style.marginTop = '20px';
+    }
 
     let img = createImg(
       "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExanNqNmlia2x3M24yM3U4c2hmMWY1OHR0bXlrdHpnMXgxcDNwbms0cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/uRAhwxlVBP6ied6EgB/giphy.gif"
     );
-    img.position((width - img.width) / 2, (height - img.height) / 2);
+    img.position(windowWidth/2 - 200, windowHeight/2 - 200);
+    img.size(400, 400);
+    img.style('z-index', '1000');
     img.show();
 
-    const button = document.createElement("button");
-    button.innerText = "Volver a jugar";
-    button.style.display = "block";
-    button.style.margin = "20px auto";
-    button.style.padding = "10px 20px";
-    button.style.fontSize = "16px";
-    button.style.cursor = "pointer";
-    button.style.position = "absolute";
-    button.style.top = img.position().y + img.height + "px";
-    button.style.left = (width - button.offsetWidth) / 2 - 70 + "px";
-    button.onclick = function () {
-      location.reload();
-    };
+    const button = createButton('Volver a jugar');
+    button.position(windowWidth/2 - 70, windowHeight/2 + 220);
+    button.style('padding', '10px 20px');
+    button.style('fontSize', '16px');
+    button.style('cursor', 'pointer');
+    button.style('z-index', '1000');
+    button.mousePressed(() => window.location.reload());
 
-    document.body.appendChild(button);
+    return;
   }
 
   clear();
@@ -387,9 +415,9 @@ function mouseDragged() {
       // Verifica si el centro está dentro del cuadrado verde
       if (
         deshechoCenterX > width / 4 - halfSquareSize &&
-        deshechoCenterX < width / 4 + halfSquareSize &&
-        deshechoCenterY > height - 260 - halfSquareSize &&
-        deshechoCenterY < height - 260 + halfSquareSize
+        deshechoCenterX < width / 4 + 10 + halfSquareSize &&
+        deshechoCenterY > height - 270 - halfSquareSize &&
+        deshechoCenterY < height - 270 + halfSquareSize
       ) {
         Botellas.splice(i, 1);
         score += 10;
