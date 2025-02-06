@@ -1,4 +1,4 @@
-let Cartones = []; 
+let Cartones = [];
 let Carton = [];
 let Plastico = [];
 let Agua = [];
@@ -6,32 +6,32 @@ let Botellas = [];
 let Botella = [];
 let timer;
 let timerInterval;
-let score = 0; 
-let gravity = 0.2; 
-let bounceFactor = 0.7; 
+let score = 0;
+let gravity = 0.2;
+let bounceFactor = 0.7;
 let floorY;
-const maxObjetos = 4; 
+const maxObjetos = 4;
 const squareSize = 100;
 let squareX = width / 2;
 let squareY = height / 2;
 let halfSquareSize = squareSize / 2;
 
 function preload() {
-  Carton.push(loadImage("./img/carton.png"));
-  Carton.push(loadImage("./img/papel.png"));
-  Carton.push(loadImage("./img/leche.png"));
-  Agua.push(loadImage("./img/agua.png"));
-  Agua.push(loadImage("./img/vaso.png"));
-  Agua.push(loadImage("./img/bolsa.png"));
-  Botella.push(loadImage("./img/botella.png"));
-  Botella.push(loadImage("./img/copa-rota.png"));
+  Carton.push(loadImage("https://i.ibb.co/mVspVw1H/carton.webp"));
+  Carton.push(loadImage("https://i.ibb.co/TMNm3BP6/papel.png"));
+  Carton.push(loadImage("https://i.ibb.co/FbjZ0FKr/leche.png"));
+  Agua.push(loadImage("https://i.ibb.co/5XQzqzYN/agua.png"));
+  Agua.push(loadImage("https://i.ibb.co/9kNjm8pG/vaso.png"));
+  Agua.push(loadImage("https://i.ibb.co/6JwtkCGV/bolsa.png"));
+  Botella.push(loadImage("https://i.ibb.co/VpVCZnXz/botella.png"));
+  Botella.push(loadImage("https://i.ibb.co/6cHbyvzT/copa-rota.png"));
 }
 
 function setup() {
   timer = 30;
   createCanvas(windowWidth, windowHeight);
-  floorY = height - 500; 
-  
+  floorY = height - 500;
+
   if (!document.getElementById("score")) {
     const scoreDiv = document.createElement("div");
     scoreDiv.id = "score";
@@ -44,7 +44,7 @@ function setup() {
       Plastico.length >= maxObjetos ||
       Botellas.length >= maxObjetos
     ) {
-      clearInterval(intervalId); 
+      clearInterval(intervalId);
     } else {
       createCarton();
       createAgua();
@@ -54,9 +54,9 @@ function setup() {
 
   timerInterval = setInterval(() => {
     if (timer > 0) {
-      timer--; 
+      timer--;
     } else {
-      clearInterval(timerInterval); 
+      clearInterval(timerInterval);
     }
   }, 1000);
 }
@@ -82,7 +82,7 @@ function draw() {
     button.style.position = "absolute";
     button.style.top = img.position().y + img.height + "px";
     button.style.left = (width - button.offsetWidth) / 2 - 70 + "px";
-    button.onclick = function() {
+    button.onclick = function () {
       location.reload();
     };
 
@@ -109,7 +109,7 @@ function draw() {
     button.style.position = "absolute";
     button.style.top = img.position().y + img.height + "px";
     button.style.left = (width - button.offsetWidth) / 2 - 70 + "px";
-    button.onclick = function() {
+    button.onclick = function () {
       location.reload();
     };
 
@@ -121,8 +121,8 @@ function draw() {
 
   for (let deshecho of Cartones) {
     if (!deshecho.dragging) {
-      deshecho.velocityY += gravity; 
-      deshecho.y += deshecho.velocityY; 
+      deshecho.velocityY += gravity;
+      deshecho.y += deshecho.velocityY;
 
       if (deshecho.y + deshecho.height > floorY) {
         deshecho.y = floorY - deshecho.height;
@@ -150,8 +150,8 @@ function draw() {
   }
   for (let deshecho of Plastico) {
     if (!deshecho.dragging) {
-      deshecho.velocityY += gravity; 
-      deshecho.y += deshecho.velocityY; 
+      deshecho.velocityY += gravity;
+      deshecho.y += deshecho.velocityY;
 
       if (deshecho.y + deshecho.height > floorY) {
         deshecho.y = floorY - deshecho.height;
@@ -163,7 +163,6 @@ function draw() {
           deshecho.angularVelocity = 0;
         }
       }
-
 
       deshecho.angle += deshecho.angularVelocity;
     }
@@ -180,8 +179,8 @@ function draw() {
   }
   for (let deshecho of Botellas) {
     if (!deshecho.dragging) {
-      deshecho.velocityY += gravity; 
-      deshecho.y += deshecho.velocityY; 
+      deshecho.velocityY += gravity;
+      deshecho.y += deshecho.velocityY;
 
       if (deshecho.y + deshecho.height > floorY) {
         deshecho.y = floorY - deshecho.height;
@@ -215,11 +214,11 @@ function draw() {
   rect(width / 2 + 80, height - 270, 230, 100);
 
   // Dibujar un cuadrado verde
-  fill(0, 255, 0, 150); 
+  fill(0, 255, 0, 150);
   rect(width / 4 + 40, height - 260, 100, 100);
 
   // Dibujar un cuadrado azul
-  fill(0, 0, 255, 150); 
+  fill(0, 0, 255, 150);
   rect((3 * width) / 4 + 185, height - 260, 210, 100);
 
   const scoreElement = document.getElementById("score");
@@ -235,45 +234,45 @@ function draw() {
 
 function createCarton() {
   let deshecho = {
-    x: random(50, width - 50), 
-    y: -100, 
+    x: random(50, width - 50),
+    y: -100,
     width: 128,
     height: 128,
     velocityY: 5,
     angle: 0,
     angularVelocity: 0,
     dragging: false,
-    image: random(Carton), 
+    image: random(Carton),
   };
-  Cartones.push(deshecho); 
+  Cartones.push(deshecho);
 }
 function createAgua() {
   let deshecho = {
-    x: random(50, width - 50), 
-    y: -100, 
+    x: random(50, width - 50),
+    y: -100,
     width: 128,
     height: 128,
     velocityY: 5,
     angle: 0,
     angularVelocity: 0,
     dragging: false,
-    image: random(Agua), 
+    image: random(Agua),
   };
-  Plastico.push(deshecho); 
+  Plastico.push(deshecho);
 }
 function createBotella() {
   let deshecho = {
-    x: random(50, width - 50), 
-    y: -100, 
+    x: random(50, width - 50),
+    y: -100,
     width: 128,
     height: 128,
     velocityY: 5,
     angle: 0,
     angularVelocity: 0,
     dragging: false,
-    image: random(Botella), 
+    image: random(Botella),
   };
-  Botellas.push(deshecho); 
+  Botellas.push(deshecho);
 }
 
 function mousePressed() {
@@ -288,9 +287,9 @@ function mousePressed() {
       deshecho.dragging = true;
       deshecho.offsetX = mouseX - deshecho.x;
       deshecho.offsetY = mouseY - deshecho.y;
-      deshecho.velocityY = 0; 
-      deshecho.angularVelocity = 0; 
-      break; 
+      deshecho.velocityY = 0;
+      deshecho.angularVelocity = 0;
+      break;
     }
   }
   for (let i = Botellas.length - 1; i >= 0; i--) {
@@ -304,9 +303,9 @@ function mousePressed() {
       deshecho.dragging = true;
       deshecho.offsetX = mouseX - deshecho.x;
       deshecho.offsetY = mouseY - deshecho.y;
-      deshecho.velocityY = 0; 
-      deshecho.angularVelocity = 0; 
-      break; 
+      deshecho.velocityY = 0;
+      deshecho.angularVelocity = 0;
+      break;
     }
   }
   for (let i = Plastico.length - 1; i >= 0; i--) {
@@ -317,13 +316,12 @@ function mousePressed() {
       mouseY > deshecho.y &&
       mouseY < deshecho.y + deshecho.height
     ) {
-      
       deshecho.dragging = true;
       deshecho.offsetX = mouseX - deshecho.x;
       deshecho.offsetY = mouseY - deshecho.y;
-      deshecho.velocityY = 0; 
-      deshecho.angularVelocity = 0; 
-      break; 
+      deshecho.velocityY = 0;
+      deshecho.angularVelocity = 0;
+      break;
     }
   }
 }
@@ -350,8 +348,8 @@ function mouseDragged() {
         deshechoCenterY < height - 260 + halfSquareSize
       ) {
         Cartones.splice(i, 1);
-        score += 10; 
-        break; 
+        score += 10;
+        break;
       }
     }
   }
@@ -373,7 +371,7 @@ function mouseDragged() {
       ) {
         Plastico.splice(i, 1);
         score += 10;
-        break; 
+        break;
       }
     }
   }
@@ -395,7 +393,7 @@ function mouseDragged() {
       ) {
         Botellas.splice(i, 1);
         score += 10;
-        break; 
+        break;
       }
     }
   }
